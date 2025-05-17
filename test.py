@@ -1,14 +1,7 @@
 import cv2
 from ultralytics import YOLO
-import numpy as np
-import base64
-import os
-import time
-from langchain_core.messages import HumanMessage
-from langchain_google_genai import ChatGoogleGenerativeAI
-import threading
 import cvzone
-from datetime import datetime
+
 
 # Load YOLOv8 model
 model = YOLO('best.pt')
