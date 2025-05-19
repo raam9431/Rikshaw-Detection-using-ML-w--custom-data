@@ -2,16 +2,12 @@ import cv2
 from ultralytics import YOLO
 import cvzone
 
-
-# Load YOLOv8 model
+# Load YOLOv12 model
 model = YOLO('best.pt')
 names = model.names
 
-
-# Open video
+# Open video    
 cap = cv2.VideoCapture("indiantraffic.mp4")
-
-
 
 # Debug mouse position
 def RGB(event, x, y, flags, param):
@@ -21,13 +17,15 @@ def RGB(event, x, y, flags, param):
 cv2.namedWindow("RGB")
 cv2.setMouseCallback("RGB", RGB)
 
-
 frame_count = 0
 
 while True:
     ret, frame = cap.read()
+
+    # If video ends, reset to the first frame
     if not ret:
-        break
+        cap.set(cv2.CAP_PROP_POS_FRAMES, 0)
+        continue
 
     frame_count += 1
     if frame_count % 3 != 0:
@@ -51,10 +49,8 @@ while True:
                         cv2.FONT_HERSHEY_SIMPLEX, 0.6, (255, 255, 255), 2)
             cvzone.putTextRect(frame, f'{track_id}', (x2, y2), 1, 1)
 
-           
-
     cv2.imshow("RGB", frame)
-    if cv2.waitKey(0) & 0xFF == 27:  # ESC to quit
+    if cv2.waitKey(1) & 0xFF == 27:  # ESC to quit
         break
 
 cap.release()
