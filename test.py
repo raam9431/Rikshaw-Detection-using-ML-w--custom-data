@@ -16,7 +16,7 @@ def RGB(event, x, y, flags, param):
 
 cv2.namedWindow("RGB")
 cv2.setMouseCallback("RGB", RGB)
-
+# lll
 frame_count = 0
 
 while True:
